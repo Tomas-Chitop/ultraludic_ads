@@ -14,7 +14,7 @@
 <div class="col-md-3">
 <div class="jumbotron text-center">
     <br>
-    <div class="card" >
+    <div class="card">
         <img class="card-img-top" height="350" src="./img/<?php echo $campaña['imagen']; ?>" alt="">
         <div class="card-body">
             <h2 style="font-weight: bold" class="card-title"><?php echo $campaña['nombre_empresa']; ?></h2>
@@ -22,7 +22,7 @@
             <a style="font-weight: bold"><?php echo $campaña['titulo_dos']; ?></a><br>
             <a><?php echo $campaña['link']; ?></a>
             <p><?php echo $campaña['telefono']; ?></p>
-            <a class="btn btn-primary" href="#" role="button">Más información</a>
+            <a class="btn btn-primary" href="mas_informacion.php" role="button">Más información</a>
         </div>
     </div>
 </div>
