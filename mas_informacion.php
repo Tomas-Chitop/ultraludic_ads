@@ -1,5 +1,12 @@
 <?php include("template/header.php") ?>
 
+<?php
+
+session_start();
+
+$id = $_GET['id'];
+
+?>
 
 <!-- conexion a la base de datos -->
 <?php
@@ -10,6 +17,7 @@
     $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+
 
 <!-- Informacion principal -->
 <?php foreach($listaCampañas as $campaña) { ?>
@@ -45,7 +53,7 @@
   </div>
 </div>
 </div>
-<?php }?>
+
 
 <!-- Informacion de la derecha -->
 <div style="max-width: 550px;">
@@ -101,5 +109,13 @@
 
   </div>
 </div>
+
+
+<?php }?>
+
+
+
+
+
 
 <?php include("template/footer.php") ?>
