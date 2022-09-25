@@ -153,7 +153,6 @@ switch($accion) {
         $txtTelefono = $campania['telefono'];
         $txtImagen = $campania['imagen'];
 
-        //echo "Presionado boton Seleccionar";
         break;
 
 
