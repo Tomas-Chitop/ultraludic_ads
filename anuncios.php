@@ -27,7 +27,7 @@ include("Admin/config/config.php");
             <!-- En esta parte se cifra el id -->
             <a class="btn btn-primary" href="mas_informacion.php?id=<?php print $campaña['id'] ?>&token=<?php echo hash_hmac('sha1', $campaña['id'], KEY_TOKEN); ?>" role="button">Más información</a>
             <br><br>
-            <a class="btn btn-primary" href="generacion.php" role="button">Generar anuncio</a>
+            <a class="btn btn-success" href="generacion.php" role="button">Generar anuncio</a>
         </div>
     </div>
 </div>

@@ -33,7 +33,7 @@ $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
                 
                 <td width="80px">
-                  <button type="button" class="btn btn-primary" id="btn">
+                  <button type="button" class="btn btn-danger" id="btn">
                      Copiar
                   </button>
                 </td>

@@ -38,6 +38,9 @@ $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
     <table class="table table-bordered">
         <thead>
             <tr>
+                <a href="reporte/reportes.php">Generar reporte</a>
+            </tr>
+            <tr>
                 <th>ID</th>
                 <th>Empresa</th>
                 <th>Web</th>
