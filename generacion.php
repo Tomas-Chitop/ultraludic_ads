@@ -1,31 +1,48 @@
 <?php include("template/header.php") ?>
 
+<?php
+//CONEXION A LA BASE DE DATOS
+include("Admin/config/bd.php");
 
-<div class="container">
-  <br>
-  <div class="row">
-    <div class="col-md-1-12">
+$sentenciaSQL = $conexion->prepare("SELECT * FROM campañas");
+$sentenciaSQL->execute();
+$listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
-    <div class="card mb-3">
-    <h3 class="card-header">Anuncio</h3>
-    <div class="card-body">
-      
-    <div class="form-group">
-      <textarea id="texto" class="form-control" id="exampleTextarea" rows="3"><a href="https://www.google.com" target="_blank"><img style="display:inline-block;" height="350px" width="300px" src="http://comunidad.iebschool.com/iebs/files/2016/02/Taco_Party_4.gif" alt="¡Anuncio no disponible!"></a></textarea>
-    </div>
-    
-    </div>
+?>
 
-  <!-- BOTON -->
-  <div class="card-footer text-muted">
-      <button type="button" class="btn btn-primary" id="btn">
-        Copiar
-      </button>
-  </div>
-  <script src="copiar.js"></script>
+<div class="col-md-13">
+    <br><br><br>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Empresa</th>
+                <th>Anuncio</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($listaCampañas as $campaña) { ?>
+            <tr>
+                <td><?php echo $campaña['id']; ?></td>
+                <td><?php echo $campaña['nombre_empresa']; ?></td>
+                <td>
+                  <textarea id="texto" class="form-control" rows="3"><a href="https://www.google.com" target="_blank"><img style="display:inline-block;" height="350px" width="300px" src="img/<?php echo $campaña['imagen']; ?>" alt="¡Anuncio no disponible!"></a></textarea>
+                </td>
+                <td width="80px"><img class="img-thumbnail rounded" src="img/<?php echo $campaña['imagen']; ?>" width="60"></td>
+                
 
+                
+                <td width="80px">
+                  <button type="button" class="btn btn-primary" id="btn">
+                     Copiar
+                  </button>
+                </td>
+                <script src="copiar.js"></script>
+
+              </tr>
+        <?php } ?>
+        </tbody>
+    </table>
 </div>
-
-<a href="https://www.google.com" target="_blank"><img style="display:inline-block;" height="350px" width="300px" src="http://comunidad.iebschool.com/iebs/files/2016/02/Taco_Party_4.gif" alt="¡Anuncio no disponible!"></a>
 
 <?php include("template/footer.php") ?>

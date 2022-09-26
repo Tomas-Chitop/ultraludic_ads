@@ -1,5 +1,28 @@
 <?php include("template/header.php") ?>
 
+
+<!-- evitar que el id de la url sea editado -->
+<?php
+include('Admin/config/config.php');
+$id_con = isset($_GET['id']) ? $_GET['id'] : '';
+$token = isset($_GET['token']) ? $_GET['token'] : '';
+
+if ($id_con == '' || $token == '') {
+    echo 'error al procesar la información';
+    exit;
+} else {
+    $token_tmp = hash_hmac('sha1', $id_con, KEY_TOKEN);
+
+    if ($token == $token_tmp) {
+    } else {
+        echo 'Error al procesar la información';
+        exit;
+    }
+
+}
+
+?>
+
 <?php
 //CONEXION A LA BASE DE DATOS
 include("Admin/config/bd.php");
@@ -35,7 +58,7 @@ $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 <td><?php echo $campaña['titulo_uno']; ?></td>
                 <td><?php echo $campaña['titulo_dos']; ?></td>
                 <td><?php echo $campaña['descripcion']; ?></td>
-                <td><?php echo $campaña['telefono']; ?></td>
+                <td></td>
                 <td></td>
                 <td><img class="img-thumbnail rounded" src="img/<?php echo $campaña['imagen']; ?>" width="60"></td>
             </tr>
