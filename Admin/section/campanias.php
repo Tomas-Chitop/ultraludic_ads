@@ -52,6 +52,7 @@ switch($accion) {
     //modificar
     case "Modificar":
 
+        //Nombre empresa
         if($txtNombreEmpresa!="") {
             $sentenciaSQL = $conexion->prepare("UPDATE campañas SET nombre_empresa=:nombre_empresa WHERE id=:id");
             $sentenciaSQL->bindParam(':nombre_empresa',$txtNombreEmpresa);
@@ -59,6 +60,7 @@ switch($accion) {
             $sentenciaSQL->execute();
         }
 
+        //Link
         if($txtLink!="") {
             $sentenciaSQL = $conexion->prepare("UPDATE campañas SET link=:link WHERE id=:id");
             $sentenciaSQL->bindParam(':link',$txtLink);
@@ -66,33 +68,29 @@ switch($accion) {
             $sentenciaSQL->execute();
         }
 
-        if($txtTitulo1!="") {
-            $sentenciaSQL = $conexion->prepare("UPDATE campañas SET titulo_uno=:titulo_uno WHERE id=:id");
-            $sentenciaSQL->bindParam(':titulo_uno',$txtTitulo1);
-            $sentenciaSQL->bindParam(':id',$txtID);
-            $sentenciaSQL->execute();
-        }
+        //titulo 1
+        $sentenciaSQL = $conexion->prepare("UPDATE campañas SET titulo_uno=:titulo_uno WHERE id=:id");
+        $sentenciaSQL->bindParam(':titulo_uno',$txtTitulo1);
+        $sentenciaSQL->bindParam(':id',$txtID);
+        $sentenciaSQL->execute();
+        
+        //titulo 2
+        $sentenciaSQL = $conexion->prepare("UPDATE campañas SET titulo_dos=:titulo_dos WHERE id=:id");
+        $sentenciaSQL->bindParam(':titulo_dos',$txtTitulo2);
+        $sentenciaSQL->bindParam(':id',$txtID);
+        $sentenciaSQL->execute();
 
-        if($txtTitulo2!="") {
-            $sentenciaSQL = $conexion->prepare("UPDATE campañas SET titulo_dos=:titulo_dos WHERE id=:id");
-            $sentenciaSQL->bindParam(':titulo_dos',$txtTitulo2);
-            $sentenciaSQL->bindParam(':id',$txtID);
-            $sentenciaSQL->execute();
-        }
+        //descripción
+        $sentenciaSQL = $conexion->prepare("UPDATE campañas SET descripcion=:descripcion WHERE id=:id");
+        $sentenciaSQL->bindParam(':descripcion',$txtDescrip);
+        $sentenciaSQL->bindParam(':id',$txtID);
+        $sentenciaSQL->execute();
 
-        if($txtDescrip!="") {
-            $sentenciaSQL = $conexion->prepare("UPDATE campañas SET descripcion=:descripcion WHERE id=:id");
-            $sentenciaSQL->bindParam(':descripcion',$txtDescrip);
-            $sentenciaSQL->bindParam(':id',$txtID);
-            $sentenciaSQL->execute();
-        }
-
-        if($txtTelefono!="") {
-            $sentenciaSQL = $conexion->prepare("UPDATE campañas SET telefono=:telefono WHERE id=:id");
-            $sentenciaSQL->bindParam(':telefono',$txtTelefono);
-            $sentenciaSQL->bindParam(':id',$txtID);
-            $sentenciaSQL->execute();
-        }
+        //telefono
+        $sentenciaSQL = $conexion->prepare("UPDATE campañas SET telefono=:telefono WHERE id=:id");
+        $sentenciaSQL->bindParam(':telefono',$txtTelefono);
+        $sentenciaSQL->bindParam(':id',$txtID);
+        $sentenciaSQL->execute();
 
         if($txtImagen!="") {
 

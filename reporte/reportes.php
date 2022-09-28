@@ -2,6 +2,50 @@
 <?
 ob_start();
 ?>
+<?php
+//CONEXION A LA BASE DE DATOS
+require '../Admin/config/bdReportes.php';
+require '../Admin/config/config.php';
+
+$db = new Database();
+$con = $db->conectar();
+
+$id=isset($_GET['id']) ? $_GET['id']:"";
+$token = isset($_GET['token']) ? $_GET['token'] : '';
+
+if ($id == '' || $token == '') {
+    echo 'error al procesar la información';
+    exit;
+} else {
+    $token_tmp = hash_hmac('sha1', $id, KEY_TOKEN);
+
+    if ($token == $token_tmp) {
+
+    $sql = $con->prepare("SELECT count(id) FROM campañas WHERE id=? AND activo=1");
+    $sql->execute([$id]);
+    if ($sql->fetchColumn() > 0) {
+        
+        $sql = $con->prepare("SELECT nombre_empresa, link, titulo_uno, titulo_dos, descripcion, imagen FROM campañas WHERE id=? AND activo=1 LIMIT 1");
+        $sql->execute([$id]);
+        $row = $sql->fetch(PDO::FETCH_ASSOC);
+
+        $nombreEmpresa = $row['nombre_empresa'];
+        $anuncio = $row['imagen'];
+        $nombre = $row['nombre_empresa'];
+        $titulo_uno = $row['titulo_uno'];
+        $titulo_dos = $row['titulo_dos'];
+        $descripcion = $row['descripcion'];
+
+    }
+
+    } else {
+        echo 'Error al procesar la información';
+        exit;
+    }
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,15 +58,6 @@ ob_start();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-
-<?php
-//CONEXION A LA BASE DE DATOS
-include("../Admin/config/bd.php");
-
-$sentenciaSQL = $conexion->prepare("SELECT * FROM campañas LIMIT 1");
-$sentenciaSQL->execute();
-$listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
-?>
 
 <div class="col-md-13">
     <br><br>
@@ -45,9 +80,8 @@ $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 <br>
 <h1 style="text-align: center;">A:</h1>
 <br>
-<?php foreach($listaCampañas as $campaña) { ?>
-<h1 style="text-align: center;"><?php echo $campaña['nombre_empresa']; ?></h1>
-<?php } ?>
+<h1 style="text-align: center;"><?php echo $nombreEmpresa; ?></h1>
+
 <div>
     <p style="text-align: justify;">
         Gracias por confiar en nosotros, es un gusto poder servirle y ayudarle a que su empresa pueda tener reconocimiento a nivel de ventas, un mayor alcance, aumentar las ganancias, entre otros tantos veneficios que usted adquiere al confiar en nosotros.
@@ -58,12 +92,12 @@ $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 <div style="background-color: #222831; border: black solid 2px; border-radius: 10px;" width="500px">
 <img src="http://<?php echo $_SERVER['HTTP_HOST'];?>/ultraludic_ADS/img/img_report/logo_ultraludic_h90.png" width="150px">
 <br>
-<center><img src="http://<?php echo $_SERVER['HTTP_HOST'];?>/ultraludic_ADS/img/<?php echo $campaña['imagen']; ?>" class="img-fluid rounded-start" alt="#"></center>
+<center><img width="240px" height="320" src="http://<?php echo $_SERVER['HTTP_HOST'];?>/ultraludic_ADS/img/<?php echo $anuncio; ?>" class="img-fluid rounded-start" alt="#"></center>
 <div class="card-body">
-    <h3 style="text-align: center; color: #00ADB5;" class="card-title"><?php echo $campaña['nombre_empresa']; ?></h3>
-    <p style="text-align: center; color: white;" class="card-text"><?php echo $campaña['titulo_uno']; ?></p>
-    <p style="text-align: center; color: white;" class="card-text"><?php echo $campaña['titulo_dos']; ?></p>
-    <p style="text-align: center; color: white;" class="card-text"><?php echo $campaña['descripcion']; ?></p>
+    <h3 style="text-align: center; color: #00ADB5;" class="card-title"><?php echo $nombre; ?></h3>
+    <p style="text-align: center; color: white;" class="card-text"><?php echo $titulo_uno; ?></p>
+    <p style="text-align: center; color: white;" class="card-text"><?php echo $titulo_dos; ?></p>
+    <p style="text-align: center; color: white;" class="card-text"><?php echo $descripcion; ?></p>
 </div>
 </div>
 <br>

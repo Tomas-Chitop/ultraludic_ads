@@ -62,7 +62,7 @@ $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 <td></td>
                 <td></td>
                 <td><img class="img-thumbnail rounded" src="img/<?php echo $campaña['imagen']; ?>" width="60"></td>
-                <td width="150px" style="text-align: center;"><a style="color: #4c9be8;" href="reporte/reportes.php">Generar reporte</a></td>
+                <td width="150px" style="text-align: center;"><a style="color: #4c9be8;" href="reporte/reportes.php?id=<?php print $campaña['id'] ?>&token=<?php echo hash_hmac('sha1', $campaña['id'], KEY_TOKEN); ?>">Generar reporte</a></td>
             </tr>
         <?php } ?>
         </tbody>
