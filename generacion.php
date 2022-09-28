@@ -11,7 +11,7 @@ $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="col-md-13">
-    <br><br><br>
+    <br><br>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -43,6 +43,7 @@ $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
         <?php } ?>
         </tbody>
     </table>
+    <br><br>
 </div>
 
 <?php include("template/footer.php") ?>
