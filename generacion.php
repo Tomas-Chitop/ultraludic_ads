@@ -37,7 +37,7 @@ $listaCampañas=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                      Copiar
                   </button>
                 </td>
-                <script src="copiar.js"></script>
+                <script src="scripts/copiar.js"></script>
 
               </tr>
         <?php } ?>
